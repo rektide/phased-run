@@ -1,11 +1,6 @@
 import tape from "tape"
-import parse from "../parse"
-
-function test( name, fn){
-	return function(){
-		tape( name, fn)
-	}
-}
+import parse from "../parse.js"
+import test from "./util/test-factory.js"
 
 export const post= test( "parse a post- postfix", function( t){
 	const parsed= parse( "postrun")
