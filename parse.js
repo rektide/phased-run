@@ -8,29 +8,40 @@ export function parse( string){
 	  scale= 0.5,
 	  pre= string.lastIndexOf( $pre),
 	  post= string.lastIndexOf( $post),
+	  cursor,
 	  root
 	if( pre> post){
-		root= string.substring( pre+ $pre.length)
+		cursor= pre+ $pre.length
+		root= string.substring( cursor)
 	}else if( post== -1){
 		return { root: string, modifier: 0}
 	}else{
-		root= string.substring( post+ $post.length)
+		cursor= post+ $post.length
+		root= string.substring( cursor)
 	}
 	while( pre!== -1|| post!== -1){
 		if( pre> post){
+			cursor-= $pre.length
+			if( pre!= cursor){
+				return { root: string, modifier: 0}
+			}
+
 			modifier-= scale
 			if( pre=== 0){
 				return { root, modifier}
 			}
 	  		pre= string.lastIndexOf( "pre", pre- 1)
-			console.log({ val: "pre", post, pre, modifier})
 		}else{
+			cursor-= $post.length
+			if( post!= cursor){
+				return { root: string, modifier: 0}
+			}
+
 			modifier+= scale
 			if(post=== 0){
 				return { root, modifier}
 			}
 	  		post= string.lastIndexOf( "post", post- 1)
-			console.log({ val: "pst", post, pre, modifier})
 		}
 		scale/= 2
 	}
