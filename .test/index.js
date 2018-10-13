@@ -5,6 +5,7 @@ import prefix from "./prefix.js"
 export function all(){
 	//parse()
 	base()
+	prefix()
 }
 export default all
 
