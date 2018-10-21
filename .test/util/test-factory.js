@@ -17,21 +17,22 @@ function expandArgs( caseName, args){
 
 export function simpleTestFactory( name, fn, { args, expected, caseName}){
 	const
-	  displayName= `${name}:${expandArgs( caseName, args)}`,
+	  areArgsArray= args&& args[ Symbol.iterator]&& !args.charAt,
+	  argArray= args&& (areArgsArray? args: [ args])|| [],
+	  displayName= `${name}:${expandArgs( caseName, argArray, areArgsArray)}`,
 	  testCase= ({
 		[ displayName]: function(){
 			test( displayName, function( t){
 				const
-				  areArgsArray= testCase.args&& testCase.args[ Symbol.iterator],
-				  argArray= testCase.args&& (areArgsArray? testCase.args: [ testCase.args])|| [],
-				  ran= fn( ...argsArray)
-				t.deepEqual( ran, testCase.expected, displayName)
+				  { args, expected}= testCase,
+				  ran= fn( ...args)
+				t.deepEqual( ran, expected, displayName)
 				t.end()
 			})
 		}
 	  })[ displayName]
 	testCase.expected= expected
-	testCase.args= args
+	testCase.args= argArray
 	return testCase
 }
 
