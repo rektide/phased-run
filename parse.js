@@ -1,3 +1,5 @@
+import { Scale, ScaleFactor} from "./scale.js"
+
 const
   $pre= "pre",
   $post= "post"
@@ -5,7 +7,7 @@ const
 export function parse( string){
 	let
 	  modifier= 0,
-	  scale= 0.5,
+	  scale= Scale,
 	  pre= string.lastIndexOf( $pre),
 	  post= string.lastIndexOf( $post),
 	  cursor,
@@ -20,30 +22,25 @@ export function parse( string){
 		root= string.substring( cursor)
 	}
 	while( pre!== -1|| post!== -1){
-		if( pre> post){
-			cursor-= $pre.length
-			if( pre!= cursor){
-				return { root: string, modifier: 0}
-			}
+		const wasPre= pre> post,
+		  len= wasPre? $pre.len: $post.len,
+		  val= wasPre? pre: post
 
-			modifier-= scale
-			if( pre=== 0){
-				return { root, modifier}
-			}
+		cursor-= len
+		if( val!= cursor){
+			return { root: string, modifier: 0}
+		}
+		const mod= wasPre? -scale: scale
+		modifier+= mod
+		if( value=== 0){
+			return { root, modifier}
+		}
+		if( wasPre){
 	  		pre= string.lastIndexOf( "pre", pre- 1)
 		}else{
-			cursor-= $post.length
-			if( post!= cursor){
-				return { root: string, modifier: 0}
-			}
-
-			modifier+= scale
-			if(post=== 0){
-				return { root, modifier}
-			}
 	  		post= string.lastIndexOf( "post", post- 1)
 		}
-		scale/= 2
+		scale/= ScaleFactor
 	}
 	return { root: string, modifier: 0}
 }
