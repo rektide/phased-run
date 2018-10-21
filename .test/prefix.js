@@ -1,5 +1,5 @@
 import prefix from "../prefix.js"
-import { test, testMatrixFactory} from "./util/test-factory.js"
+import { testFactory as test, testMatrixFactory} from "./util/test-factory.js"
 import PrefixFixture from "./fixture/phases.js"
 
 export const [
@@ -10,7 +10,7 @@ export const [
 	postpre,
 	prepostpre,
 	postprepostpre
-]= testMatrixFactory( "prefix", prefix, PrefixFixture)
+]= testMatrixFactory( "prefix", prefix, PrefixFixture())
 
 export const empty= test( "prefix of empty string", function( t){
 	t.equal( prefix( ""), 0)
