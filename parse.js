@@ -23,7 +23,7 @@ export function parse( string){
 	}
 	while( pre!== -1|| post!== -1){
 		const wasPre= pre> post,
-		  len= wasPre? $pre.len: $post.len,
+		  len= wasPre? $pre.length: $post.length,
 		  val= wasPre? pre: post
 
 		cursor-= len
@@ -32,13 +32,16 @@ export function parse( string){
 		}
 		const mod= wasPre? -scale: scale
 		modifier+= mod
-		if( value=== 0){
+		if( val=== 0){
 			return { root, modifier}
 		}
+		const
+		  literal= wasPre? $pre: $post,
+		  lastIndex= string.lastIndexOf( literal, val- 1)
 		if( wasPre){
-	  		pre= string.lastIndexOf( "pre", pre- 1)
+			pre= lastIndex
 		}else{
-	  		post= string.lastIndexOf( "post", post- 1)
+			post= lastIndex
 		}
 		scale/= ScaleFactor
 	}

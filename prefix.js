@@ -15,7 +15,7 @@ export function prefix( prefixes){
 	  exec
 	r.lastIndex= 0
 	while( exec= r.exec( prefixes)){
-		if( !exec|| exec.index!== cursor){
+		if( exec.index!== cursor){
 			return -1
 		}
 		if( exec[ 0]=== "pre"){

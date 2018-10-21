@@ -5,6 +5,7 @@ export function testFactory( name, fn){
 		tape( name, fn)
 	}
 }
+export const test= testFactory
 
 function expandArgs( caseName, args){
 	if( caseName){
