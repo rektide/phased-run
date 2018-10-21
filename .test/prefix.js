@@ -1,6 +1,6 @@
 import prefix from "../prefix.js"
 import { test, testMatrixFactory} from "./util/test-factory.js"
-import PhrasesFixture from "./fixture/phrases.js"
+import PrefixFixture from "./fixture/phases.js"
 
 export const [
 	run,
