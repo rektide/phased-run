@@ -39,7 +39,7 @@ export class PhaseRunnerCollection extends Splicer{
 			this[ $keys]= null
 		}
 	}
-	get keys(){
+	keys(){
 		const current= this[ $keys]
 		if( current){
 			return current
@@ -47,8 +47,13 @@ export class PhaseRunnerCollection extends Splicer{
 		const keys= Array.from( this[ $map].keys())
 		return this[ $keys]= keys.sort()
 	}
+	*phases(){
+		yield *this[Symbol.iterator]()
+	}
 	*[ Symbol.iterator](){
-		
-		
+		for( var key of this.keys){
+			var phase= this[ $map].get( key)
+			yield *phase
+		}
 	}
 }
