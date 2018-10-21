@@ -5,16 +5,28 @@ const
   $collection= Symbol.for( "PhaseRunner:collection"),
   $keys= Symbol.for( "PhaseRunner:keys"),
   $map= Symbol.for( "PhaseRunner:map")
+  $findPhase= Symbol.for( "PhaseRunner:findPhase")
 
 export const Symbols= {
 	collection: $collection,
-	keys: $keys
+	keys: $keys,
+	map,
+	findPhase
+}
+
+export function getPhase( o){
+	return o.phase
 }
 
 export class PhaseRunnerCollection extends Splicer{
-	constructor({ phases, findPhase }={}, ...phases){
+	constructor({ findPhase, parse}={ findPhase: getPhase, parse}, ...phases){
 		this[ $map]= new Map() // phase-number => array of values for that phase
 		this[ $keys]= null // sorted array of phase-numbers
+		this[ $parse]= parse
+		this[ $findPhase]= findPhase
+		if( phases){
+			this.splice( 0, 0, phases)
+		}
 	}
 	splice( i, del, ...added){
 		const map= this[ $map]
@@ -68,7 +80,7 @@ export class PhaseRunnerCollection extends Splicer{
 		}
 		for( let k of added){
 			const
-			  phase= this.findPhase( k),
+			  phase= this[ $findPhase]( k),
 			  value= this.parse( phase),
 			  existing= map.get( value)
 			if( !existing){
