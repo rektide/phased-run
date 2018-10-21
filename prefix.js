@@ -1,6 +1,6 @@
-const r= /(pre|post)+?/g
+import { Scale, ScaleFactor} from "./scale.js"
 
-const scale= 0.4
+const r= /(pre|post)+?/g
 
 /**
  * Calculate the prefix value for a string of prefixes
@@ -15,21 +15,16 @@ export function prefix( prefixes){
 	  exec
 	r.lastIndex= 0
 	while( exec= r.exec( prefixes)){
+		if( !exec|| exec.index!== cursor){
+			return -1
+		}
 		if( exec[ 0]=== "pre"){
-			if( exec.index!== cursor){
-				return -1
-			}
-
-			value/= 2
-			value-= scale
+			value/= ScaleFactor
+			value-= Scale
 			cursor+= 3
 		}else{
-			if( exec.index!== cursor){
-				return -1
-			}
-
-			value/= 2
-			value+= scale
+			value/= ScaleFactor
+			value+= Scale
 			cursor+= 4
 		}
 	}

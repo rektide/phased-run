@@ -1,30 +1,16 @@
 import prefix from "../prefix.js"
-import test from "./util/test-factory.js"
+import { test, testMatrixFactory} from "./util/test-factory.js"
+import PhrasesFixture from "./fixture/phrases.js"
 
-export const pre= test( "prefix of pre-", function( t){
-	t.equal( prefix( "pre") , -0.4)
-	t.end()
-})
-
-export const post= test( "prefix of post-", function( t){
-	t.equal( prefix( "post"), 0.4)
-	t.end()
-})
-
-export const prepost= test( "prefix of prepost-", function( t){
-	t.equal( prefix( "prepost"), 0.2)
-	t.end()
-})
-
-export const postprepost= test( "prefix of postprepost-", function( t){
-	t.equal( prefix( "postprepost"), 0.3)
-	t.end()
-})
-
-export const prepostprepost= test( "prefix of prepostprepost-", function( t){
-	t.equal( prefix( "prepostprepost"), 0.25)
-	t.end()
-})
+export const [
+	run,
+	post,
+	pre,
+	prepre,
+	postpre,
+	prepostpre,
+	postprepostpre
+]= testMatrixFactory( "prefix", prefix, PrefixFixture)
 
 export const empty= test( "prefix of empty string", function( t){
 	t.equal( prefix( ""), 0)
@@ -47,11 +33,13 @@ export const badEnd= test( "prefix of middle bad match", function( t){
 })
 
 export function all(){
-	pre()
+	run()
 	post()
-	prepost()
-	postprepost()
-	prepostprepost()	
+	pre()
+	prepre()
+	postpre()
+	prepostpre()
+	postprepostpre()
 	empty()
 	badStart()
 	badMiddle()
