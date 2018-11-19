@@ -1,7 +1,6 @@
 import Base from "./base.js"
 import Prefix from "./prefix.js"
-
-export const $base= Symbol.for("PhasedRunValuation:base")
+import { $base, $phases} from "./symbol.js"
 
 const cache= new WeakMap()
 
@@ -20,6 +19,7 @@ export class PhasedRunValuation{
 		}
 	}
 	constructor( phases, { basis}= { basis: 10}){
+		this[ $phases]= phases
 		this[ $base]= base( phases)
 		for( let i= 0; i< phases.length; ++i){
 			const phase= phases[ i]
@@ -42,7 +42,8 @@ export class PhasedRunValuation{
 		  value= modifier+ this[ base]
 		return this[ prefixedPhases]= value
 	}
-	comparator(){
+	comparator( a, b){
+		return this.value( a)- this.value( b)
 	}
 }
 export default PhasedRunValuation.Factory
