@@ -9,4 +9,9 @@ export class PhasedRun extends SelfSortingArray{
 	get phases(){
 		return this[ $comparator][ $phases]
 	}
+	clone(){
+		const clone= new this.constructor( this[ $comparator])
+		Array.prototype.push.call( clone, ...this)
+		return clone
+	}
 }
