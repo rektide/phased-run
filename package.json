@@ -19,6 +19,7 @@
 		"tape": "^4.9.1"
 	},
 	"dependencies": {
+		"binary-search": "^1.3.4",
 		"extensible-function": "^1.1.1"
 	}
 }
