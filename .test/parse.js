@@ -5,7 +5,7 @@ import test from "./util/test-factory.js"
 export const post= test( "parse a post- postfix", function( t){
 	const parsed= parse( "postrun")
 	t.equal( parsed.root, "run")
-	t.equal( parsed.modifier, 0.25)
+	t.equal( parsed.modifier, 2)
 	t.end()
 })
 
@@ -19,27 +19,27 @@ export const modifierless= test( "parse without modifier", function( t){
 export const pre= test( "parse a pre- prefix", function( t){
 	const parsed= parse( "prerun")
 	t.equal( parsed.root, "run")
-	t.equal( parsed.modifier, -0.25)
+	t.equal( parsed.modifier, -2)
 	t.end()
 })
 export const prepre= test("parse a prepre- prefix", function( t){
 	const parsed= parse( "preprerun")
 	t.equal( parsed.root, "run")
-	t.equal( parsed.modifier, -0.375)
+	t.equal( parsed.modifier, -3)
 	t.end()
 })
 
 export const postpre= test( "parse a postpre- prefix", function( t){
 	const parsed= parse( "postprerun")
 	t.equal( parsed.root, "run")
-	t.equal( parsed.modifier, -0.125)
+	t.equal( parsed.modifier, -1)
 	t.end()
 })
 
-export const postprepostpre= test( "parse a postpostprepre- prefix", function( t){
+export const postprepostpre= test( "parse a postprepostprepre- prefix", function( t){
 	const parsed= parse( "postprepostprerun")
 	t.equal( parsed.root, "run")
-	t.equal( parsed.modifier, (-8 + 4 - 2 + 1) / 32 )
+	t.equal( parsed.modifier, (-8 + 4 - 2 + 1) / 4)
 	t.end()
 })
 
