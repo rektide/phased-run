@@ -23,3 +23,7 @@ export function main(){
 	console.log("yes")
 }
 export default main
+
+if( require.main=== module){
+	main()
+}

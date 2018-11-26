@@ -25,12 +25,17 @@ export class PhasedRun extends Array{
 	get phases(){
 		return this[ $phases]
 	}
+	get [ Symbol.species](){
+		return this.homg? Array: PhasedRun
+	}
 
 	install( phase, item){
 		const
 		  phases= this[ $phases],
 		  i= binarySearch( this[ $phases], phase, this[ $comparator])
+		this.homg= true
 		Array.prototype.splice.call( this, i, 0, item)
+		delete this.homg
 		phases.splice( i, 0, phase)
 		return this
 	}
