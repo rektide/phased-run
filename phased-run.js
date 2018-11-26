@@ -4,6 +4,8 @@ import Comparator from "./comparator.js"
 import NotImplemented from "./not-implemented.js"
 import { $phases, $comparator} from "./symbol.js"
 
+let hackSpecies= 0
+
 export class PhasedRun extends Array{
 	constructor( valuationOrPhases){
 		super()
@@ -25,17 +27,17 @@ export class PhasedRun extends Array{
 	get phases(){
 		return this[ $phases]
 	}
-	get [ Symbol.species](){
-		return this.homg? Array: PhasedRun
+	static get [ Symbol.species](){
+		return hackSpecies? Array: PhasedRun
 	}
 
 	install( phase, item){
 		const
 		  phases= this[ $phases],
 		  i= binarySearch( this[ $phases], phase, this[ $comparator])
-		this.homg= true
+		hackSpecies++
 		Array.prototype.splice.call( this, i, 0, item)
-		delete this.homg
+		hackSpecies--
 		phases.splice( i, 0, phase)
 		return this
 	}
