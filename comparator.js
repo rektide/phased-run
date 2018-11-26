@@ -6,29 +6,37 @@ import Prefix from "./prefix.js"
 
 const cache= new WeakMap()
 
+const def= {
+  basis
+}
+
+
 export class Comparator extends ExtensibleFunction.Bound{
-	static Factory( phasesOrValuation){
-		// check if we already are a Valuation
-		if( phasesOrValuation instanceof PhasedRunValuation){
-			return phasesOrValuation
+	static Factory( phasesOrCompartor){
+		if( this instanceof factory){
+			throw new Error( "Do not instantiate")
+		}
+		// check if we already are a Compartor
+		if( phasesOrCompartor instanceof Comparator){
+			return phasesOrCompartor
 		}
 		// check if we have a cached copy of this phase
-		const cached= cache.get( phasesOrValuation)
+		const cached= cache.get( phasesOrCompartor)
 		if( cached){
 			return cached
 		}
-		// cache this valuation
-		const valuation= new PhasedRunValuation( phasesOrValuation)
-		cache.set( phasesOrValuation, valuation)
-		return valuation
+		// cache this comparator
+		const comparator= new Comparator( phasesOrCompartor)
+		cache.set( phasesOrCompartor, comparator)
+		return comparator
 	}
-	constructor( phases, { basis}= { basis}){
+	constructor( phases, { basis}= def){
 		// ultimately we are a comparator!
 		super( function( a, b){
 			return this.value( a)- this.value( b)
 		})
 		// finds the "base" of any prefixed phases
-		this.base= base( phases)
+		this.base= Base( phases)
 		// find the value for each phase
 		for( let i= 0; i< phases.length; ++i){
 			const phase= phases[ i]
@@ -59,3 +67,5 @@ export class Comparator extends ExtensibleFunction.Bound{
 	}
 }
 export default Comparator.Factory
+
+const factory= Comparator.Factory

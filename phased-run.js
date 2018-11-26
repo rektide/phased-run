@@ -6,10 +6,11 @@ import { $phases, $comparator} from "./symbol.js"
 
 export class PhasedRun extends Array{
 	constructor( valuationOrPhases){
+		super()
 		Object.defineProperties( this, {
 			// store the comparator we use for binary search
 			[ $comparator]: {
-				value: Valuation.Factory( valuationOrPhases)
+				value: Comparator( valuationOrPhases)
 			},
 			// store what phase each item is in
 			[ $phases]: {
