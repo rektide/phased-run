@@ -10,7 +10,6 @@ const def= {
   basis
 }
 
-
 export class Comparator extends ExtensibleFunction.Bound{
 	static Factory( phasesOrCompartor){
 		if( this instanceof factory){
@@ -61,9 +60,9 @@ export class Comparator extends ExtensibleFunction.Bound{
 		// find prefix's value, & add to base
 		const
 		  prefixes= prefixedPhase.substring( 0, prefixedPhase.length- base.length),
-		  modifier= Prefix( prefixes)
+		  modifier= Prefix( prefixes),
 		  value= modifier+ this[ base]
-		return this[ prefixedPhases]= value
+		return this[ prefixedPhase]= value
 	}
 }
 export default Comparator.Factory

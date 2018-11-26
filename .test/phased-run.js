@@ -8,14 +8,10 @@ const addItems= test( "can add items into a phased-run", function( t){
 	const
 	  accum= 0,
 	  pr= new PhasedRun( trafficLight)
-	console.log( "l1")
 	pr.install( "yellow", ()=> accum+= 1)
-	console.log( "l2")
 	pr.install( "red", ()=> accum+= 3)
-	console.log( "l3")
 	pr.install( "green", ()=> accum+= 1)
-	console.log( "l-done")
-	console.log( pr.phases())
+	t.end()
 })
 
 export function main(){

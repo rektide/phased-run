@@ -7,12 +7,12 @@ import { $phases, $comparator} from "./symbol.js"
 let hackSpecies= 0
 
 export class PhasedRun extends Array{
-	constructor( valuationOrPhases){
+	constructor( comparatorOrPhases){
 		super()
 		Object.defineProperties( this, {
 			// store the comparator we use for binary search
 			[ $comparator]: {
-				value: Comparator( valuationOrPhases)
+				value: Comparator( comparatorOrPhases)
 			},
 			// store what phase each item is in
 			[ $phases]: {
@@ -43,7 +43,7 @@ export class PhasedRun extends Array{
 	}
 
 	clone(){
-		const clone= new PhasedRun( this[ $valuation])
+		const clone= new PhasedRun( this[ $comparator])
 		Array.prototype.splice.call( clone, 0, 0, this)
 		// hazard: we're using existing pieces!
 		clone[ $comparator]= this[ $comparator]
