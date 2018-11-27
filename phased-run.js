@@ -34,11 +34,12 @@ export class PhasedRun extends Array{
 	install( phase, item){
 		const
 		  phases= this[ $phases],
-		  i= binarySearch( this[ $phases], phase, this[ $comparator])
+		  i= binarySearch( this[ $phases], phase, this[ $comparator]),
+		  abs= i< 0? -i- 1: i
 		hackSpecies++
-		Array.prototype.splice.call( this, i, 0, item)
+		Array.prototype.splice.call( this, abs, 0, item)
 		hackSpecies--
-		phases.splice( i, 0, phase)
+		phases.splice( abs, 0, phase)
 		return this
 	}
 
