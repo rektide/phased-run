@@ -21,12 +21,16 @@ const canValuePhase= test( "comparator can get a value via value()", function( t
 
 const prefixed= test( "comparator accepts prefixed phases", function( t){
 	const c= new Comparator( trafficLight)
+	// we can add prefixes to items
 	t.equal( c.value("pregreen"), -2, "pregreen is -2")
 	t.equal( c.value("postgreen"), 2, "postgreen is 2")
 	t.equal( c.value("preyellow"), 8, "pregreen is 8")
 	t.equal( c.value("postyellow"), 12, "postyellow is 12")
 	t.equal( c.value("prered"), 18, "pregreen is 18")
 	t.equal( c.value("postred"), 22, "postred is 22")
+	// prefixes can stack
+	t.equal( c.value("postpostred"), 23, "postpostred is 23")
+	t.equal( c.value("postpostpostred"), 23.5, "postpostpostred is 23.5")
 	// also, ps, we don't have to re-calculate this again!
 	t.equal( c[ "postred"], 22, "comparator now knows 'postred'")
 	t.end()
