@@ -30,10 +30,26 @@ const prefixed= test( "comparator accepts prefixed phases", function( t){
 	t.end()
 })
 
+// this is really the core duty comparator serves:
+// it is a function that compares phases against each other
+const compares= test( "comparator compares", function( t){
+	const c= new Comparator( trafficLight)
+	// compare "green" versus other phases
+	t.equal( c( "green", "green"), -1, "green after green")
+	t.equal( c( "yellow", "green"), 1, "green before yellow")
+	t.equal( c( "red", "green"), 1, "green before red")
+	// compare "yellow" versus other phases
+	t.equal( c( "green", "yellow"), -1, "yellow after green")
+	t.equal( c( "yellow", "yellow"), -1, "yellow after yellow")
+	t.equal( c( "red", "yellow"), 1, "yellow before red")
+	t.end()
+})
+
 export function main(){
 	phasesAreValues()
 	canValuePhase()
 	prefixed()
+	compares()
 }
 export default main
 

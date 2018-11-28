@@ -2,12 +2,14 @@ import parse from "./parse.js"
 import base from "./base.js"
 import prefix from "./prefix.js"
 import pr from "./phased-run.js"
+import comparator from "./comparator.js"
 
 export {
 	parse,
 	base,
 	prefix,
-	pr
+	pr,
+	comparator
 }
 
 export function all(){
@@ -15,6 +17,7 @@ export function all(){
 	base()
 	prefix()
 	pr()
+	comparator()
 }
 export default all
 
