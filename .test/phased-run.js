@@ -1,9 +1,8 @@
-import test from "./util/test-factory.js"
-import increments from "./fixture/increments.js"
-
 import PhasedRun from "../phased-run.js"
 
-const trafficLight= [ "green", "yellow", "red"]
+import test from "./util/test-factory.js"
+import increments from "./fixture/increments.js"
+import trafficLight from "./fixture/traffic.js"
 
 const basicDemonstration= test( "can add items into a phased-run & it will sort them", function( t){
 	// create a value and some tools we can increment with

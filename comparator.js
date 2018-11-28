@@ -76,6 +76,9 @@ export class Comparator extends ExtensibleFunction.Bound{
 		return this[ prefixedPhase]= value
 	}
 }
-export default Comparator.Factory
 
-const factory= Comparator.Factory
+export const
+  comparator= Comparator,
+  factory= Comparator.Factory,
+  Factory= Comparator.factory
+export default Comparator.Factory
