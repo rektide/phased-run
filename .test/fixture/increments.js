@@ -5,11 +5,20 @@ export function increments(){
 			accum+= n
 		}
 	}
-	return {
+	let o= {
 	  accum,
 	  inc1: inc( 1),
 	  inc2: inc( 2),
 	  inc3: inc( 3)
 	}
+	Object.defineProperty( o, "accum", {
+		get: function(){
+			return accum
+		},
+		set: function( val){
+			accum= val
+		}
+	})
+	return o
 }
 export default increments
