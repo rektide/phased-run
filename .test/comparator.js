@@ -27,6 +27,8 @@ const prefixed= test( "comparator accepts prefixed phases", function( t){
 	t.equal( c.value("postyellow"), 12, "postyellow is 12")
 	t.equal( c.value("prered"), 18, "pregreen is 18")
 	t.equal( c.value("postred"), 22, "postred is 22")
+	// also, ps, we don't have to re-calculate this again!
+	t.equal( c[ "postred"], 22, "comparator now knows 'postred'")
 	t.end()
 })
 
