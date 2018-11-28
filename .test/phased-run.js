@@ -34,9 +34,22 @@ const basicDemonstration= test( "can add items into a phased-run & it will sort 
 	t.end()
 })
 
+const insertAfter= test( "adding an item of identical value will add it to the end of the phase", function( t){
+	// create a value and some tools we can increment with
+	let { getAccum, inc1, inc2, inc3}= increments()
+	const pr= new PhasedRun( trafficLight)
+	pr.install( "yellow", inc1)
+	pr.install( "yellow", inc2)
+	pr[ 0]()
+	t.equal( getAccum(), 1, "+1 to 1")
+	pr[ 1]()
+	t.equal( getAccum(), 3, "+2 to 3")
+	t.end()
+})
+
 export function main(){
 	basicDemonstration()
-	console.log("yes")
+	insertAfter()
 }
 export default main
 

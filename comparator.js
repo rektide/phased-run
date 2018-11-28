@@ -6,8 +6,17 @@ import Prefix from "./prefix.js"
 
 const cache= new WeakMap()
 
+export function insertLast( a, b){
+	return a> b? 1: -1
+}
+
+export function insertFirst( a, b){
+	return a- b
+}
+
 const def= {
-  basis
+  basis,
+  comparison: insertLast
 }
 
 export class Comparator extends ExtensibleFunction.Bound{
@@ -29,11 +38,13 @@ export class Comparator extends ExtensibleFunction.Bound{
 		cache.set( phasesOrCompartor, comparator)
 		return comparator
 	}
-	constructor( phases, { basis}= def){
+	constructor( phases, { basis, comparison}= def){
 		// ultimately we are a comparator!
 		super( function( a, b){
-			return this.value( a)- this.value( b)
+			return this.comparison( this.value(a), this.value(b))
 		})
+		// determine sort order of the two given values
+		this.comparison= comparison
 		// finds the "base" of any prefixed phases
 		this.base= Base( phases)
 		// find the value for each phase
