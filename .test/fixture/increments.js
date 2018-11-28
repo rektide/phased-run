@@ -12,8 +12,8 @@ export function increments(){
 	  inc1: inc( 1),
 	  inc2: inc( 2),
 	  inc3: inc( 3)
-	}
-	o.getAccum= o.getAccum.bind( o)
+	};
+	[ "getAccum", "inc1", "inc2", "inc3"].forEach( name=> o[ name]= o[ name].bind( o))
 	return o
 }
 export default increments
