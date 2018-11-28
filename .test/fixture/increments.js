@@ -1,7 +1,9 @@
 export function increments(){
 	let accum= 0
 	function inc( n){
-		accum+= n
+		return function(){
+			accum+= n
+		}
 	}
 	return {
 	  accum,
