@@ -1,3 +1,3 @@
 export const
-  $comparator= Symbol.for("phased-run:comparator"),
-  $phases= Symbol.for("phased-run:phases")
+  $comparator= Symbol.for( "phased-run:comparator"),
+  $state= Symbol.for( "phased-run:state")

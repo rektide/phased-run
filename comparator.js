@@ -14,9 +14,14 @@ export function insertFirst( a, b){
 	return a- b
 }
 
+export function phasePicker( a){
+	return (a&& a.phase)? a.phase: a
+}
+
 const def= {
   basis,
-  comparison: insertLast
+  comparison: insertLast,
+  phasePicker
 }
 
 export class Comparator extends ExtensibleFunction.Bound{
@@ -38,15 +43,19 @@ export class Comparator extends ExtensibleFunction.Bound{
 		cache.set( phasesOrCompartor, comparator)
 		return comparator
 	}
-	constructor( phases, { basis, comparison}= def){
+	constructor( phases, { basis, comparison, phasePicker}= def){
 		// ultimately we are a comparator!
 		super( function( a, b){
-			return this.comparison( this.value(a), this.value(b))
+			return this.comparison(
+			  this.value( this.phasePicker( a)),
+			  this.value( this.phasePicker( b)))
 		})
 		// determine sort order of the two given values
 		this.comparison= comparison
 		// finds the "base" of any prefixed phases
 		this.base= Base( phases)
+		// find the "phase" in a state
+		this.phasePicker= phasePicker
 		// find the value for each phase
 		for( let i= 0; i< phases.length; ++i){
 			const phase= phases[ i]
@@ -54,6 +63,10 @@ export class Comparator extends ExtensibleFunction.Bound{
 		}
 	}
 	value( prefixedPhase){
+		// state might either be the phase string, or an object with phase.
+		if( prefixedPhase&& prefixedPhase.phase){
+			return prefixedPhase.phase
+		}
 		// perhaps we already know the value?
 		const current= this[ prefixedPhase]
 		if( current){

@@ -2,7 +2,7 @@ import binarySearch from "binary-search"
 
 import Comparator from "./comparator.js"
 import NotImplemented from "./not-implemented.js"
-import { $phases, $comparator} from "./symbol.js"
+import { $state, $comparator} from "./symbol.js"
 
 let hackSpecies= 0
 
@@ -14,8 +14,8 @@ export class PhasedRun extends Array{
 			[ $comparator]: {
 				value: Comparator( comparatorOrPhases)
 			},
-			// store what phase each item is in
-			[ $phases]: {
+			// store state on each item
+			[ $state]: {
 				value: [],
 				writable: true
 			}
@@ -24,23 +24,23 @@ export class PhasedRun extends Array{
 	get comparator(){
 		return this[ $comparator]
 	}
-	get phases(){
-		return this[ $phases]
+	get state(){
+		return this[ $state]
 	}
 	static get [ Symbol.species](){
 		return hackSpecies? Array: PhasedRun
 	}
 
-	install( phase, item){
+	install( item, state){
 		const
-		  phases= this[ $phases],
-		  i= binarySearch( this[ $phases], phase, this[ $comparator]),
+		  states= this[ $state],
+		  i= binarySearch( states, state, this[ $comparator]),
 		  abs= i< 0? -i- 1: i
 		hackSpecies++
 		Array.prototype.splice.call( this, abs, 0, item)
 		hackSpecies--
-		phases.splice( abs, 0, phase)
-		return this
+		states.splice( abs, 0, state)
+		return abs
 	}
 
 	clone(){
@@ -48,7 +48,7 @@ export class PhasedRun extends Array{
 		Array.prototype.splice.call( clone, 0, 0, this)
 		// hazard: we're using existing pieces!
 		clone[ $comparator]= this[ $comparator]
-		clone[ $phases]= this[ $phases]
+		clone[ $state]= this[ $state]
 		return clone
 	}
 
