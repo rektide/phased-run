@@ -1,10 +1,11 @@
 {
 	"name": "phased-run",
+	"type": "module",
 	"version": "1.0.0",
 	"description": "",
 	"main": "phased-run.js",
 	"scripts": {
-		"test": "node -r esm .test"
+		"test": "node .test"
 	},
 	"repository": {
 		"type": "git",
@@ -15,7 +16,7 @@
 	"license": "X11",
 	"module": "phased-run.js",
 	"devDependencies": {
-		"esm": "^3.1.1",
+		"is-main": "^0.2.0",
 		"tape": "^4.9.1"
 	},
 	"dependencies": {

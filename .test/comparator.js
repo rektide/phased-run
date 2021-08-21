@@ -1,3 +1,5 @@
+import isMain from "is-main"
+
 import { Comparator} from "../comparator.js"
 
 import test from "./util/test-factory.js"
@@ -59,6 +61,6 @@ export function main(){
 }
 export default main
 
-if( require.main=== module){
+if( isMain( import.meta)){
 	main()
 }

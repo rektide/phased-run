@@ -1,3 +1,4 @@
+import isMain from "is-main"
 import prefix from "../prefix.js"
 import { testFactory as test, testMatrixFactory} from "./util/test-factory.js"
 import PrefixFixture from "./fixture/phases.js"
@@ -47,6 +48,6 @@ export function all(){
 }
 export default all
 
-if( typeof require!== "undefined"&& require.main=== module){
+if( isMain( import.meta)){
 	all()
 }

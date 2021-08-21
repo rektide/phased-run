@@ -1,4 +1,6 @@
+import isMain from "is-main"
 import tape from "tape"
+
 import parse from "../parse.js"
 import test from "./util/test-factory.js"
 
@@ -69,6 +71,6 @@ export function all(){
 }
 export default all
 
-if( typeof require!== "undefined"&& require.main=== module){
+if( isMain( import.meta)){
 	all()
 }
