@@ -5,7 +5,7 @@
 	"description": "",
 	"main": "phased-run.js",
 	"scripts": {
-		"test": "node .test"
+		"test": "node .test/index.js"
 	},
 	"repository": {
 		"type": "git",
